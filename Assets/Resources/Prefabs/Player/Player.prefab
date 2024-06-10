@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c0d33a9a86241b48dc360e182e2404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _joystick: {fileID: 3517007906857961473, guid: 41cda0dd87bd141d2a642aa507eb7327,
+  _joystick: {fileID: 3662662469840585174, guid: 41cda0dd87bd141d2a642aa507eb7327,
     type: 3}
   _animatorController: {fileID: 5499439128987875001}
   _rotateSpeed: 6
