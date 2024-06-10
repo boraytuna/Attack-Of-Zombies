@@ -1,8 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
 
-// Players camera position and it follows the player.
-public class CameraController : MonoBehaviour
+// This script is responsible for following the player in game.
+public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform _player;
 
