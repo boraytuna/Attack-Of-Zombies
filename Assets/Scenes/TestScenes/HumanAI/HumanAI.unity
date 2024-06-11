@@ -2266,7 +2266,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &1398292251
 MeshRenderer:
@@ -3009,7 +3009,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d3a2ef33558fe4ddd89fc0bb5c01d420, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b1a03a30891844a8993a75e6f73955cf, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2039762617
 GameObject:
@@ -3530,10 +3530,9 @@ GameObject:
   - component: {fileID: 3587784255345046193}
   - component: {fileID: 8755324242234386560}
   - component: {fileID: 8379789379011201920}
-  - component: {fileID: 4415659582786168911}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Zombie
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4197,18 +4196,6 @@ Transform:
   m_Father: {fileID: 4699234998337862271}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4415659582786168911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096912523819419663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2021b0c85807949eb983ea905c9e4c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4564840609843141953
 Transform:
   m_ObjectHideFlags: 0
@@ -4391,6 +4378,7 @@ GameObject:
   - component: {fileID: 3786635495451142343}
   - component: {fileID: 3628014916688439103}
   - component: {fileID: 7714016660727128982}
+  - component: {fileID: 7714016660727128983}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4697,7 +4685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbaeac1fd32546959e2d0807335d597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanPrefab: {fileID: 6085094873640799437, guid: c1dcc36ed3ac646cba662064aae768a8,
+  humanPrefab: {fileID: 6085094873640799437, guid: 5bf9a614e66344c00ba9d3b7596743a9,
     type: 3}
   zombie: {fileID: 2524792405448774316}
   minDistanceFromZombie: 10
@@ -4709,6 +4697,19 @@ MonoBehaviour:
   maxGroupRadius: 5.5
   minGroupSeparationDistance: 15.3
   navMeshSurface: {fileID: 2013770449}
+--- !u!114 &7714016660727128983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761041654850934682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0247df79cb3d44476b9a6fdf61c20a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombies: []
 --- !u!1 &7719556935187985838
 GameObject:
   m_ObjectHideFlags: 0
@@ -4758,6 +4759,8 @@ MonoBehaviour:
   _joystick: {fileID: 5618419849545156704}
   _animatorController: {fileID: 8755324242234386560}
   _rotateSpeed: 6
+  speed: 10
+  IsMoving: 0
 --- !u!4 &8498343852376487156
 Transform:
   m_ObjectHideFlags: 0

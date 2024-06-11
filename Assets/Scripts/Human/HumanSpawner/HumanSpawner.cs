@@ -64,24 +64,6 @@ public class HumanSpawner : MonoBehaviour
         }
     }
 
-    // void SpawnGroup(Vector3 center, int humansPerGroup, float groupRadius)
-    // {
-    //     for (int i = 0; i < humansPerGroup; i++)
-    //     {
-    //         Vector3 randomOffset = Random.insideUnitSphere * groupRadius;
-    //         randomOffset.y = 0; // Ensure humans spawn on the NavMesh surface
-    //         Vector3 spawnPosition = center + randomOffset;
-
-    //         // Check if the spawn position is far enough from the zombie
-    //         while (Vector3.Distance(spawnPosition, zombie.position) < minDistanceFromZombie)
-    //         {
-    //             spawnPosition = GetRandomSpawnPositionOnNavMesh(); // Get a new random position
-    //         }
-
-    //         Instantiate(humanPrefab, spawnPosition, Quaternion.identity);
-    //     }
-    // }
-
     void SpawnGroup(Vector3 center, int humansPerGroup, float groupRadius)
     {
         for (int i = 0; i < humansPerGroup; i++)

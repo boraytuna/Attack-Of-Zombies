@@ -1,29 +1,21 @@
 using UnityEngine;
 
-// This script manages humans turning to zombies when the collider is triggered.
+// This script turn human objects to zombie objects. 
+// Increments the number of zombies for the zombie counter script.
 public class HumanToZombie : MonoBehaviour
 {
-    public GameObject zombiePrefab; // Reference to the zombie prefab
     public LayerMask groundLayer; // Layer mask to define what layers are considered ground
+    private ZombieCounter zombieCounter; // Reference to the Zombie Counter script
+    public GameObject zombiePrefab; // Reference to the zombie prefab, assigned in the inspector
 
-    void Awake()
+    private void Start()
     {
-        // Find an instance of the zombie in the scene by its tag
-        GameObject existingZombie = GameObject.FindWithTag("Zombie");
-        if (existingZombie != null)
-        {
-            // Get the prefab from the existing zombie instance
-            zombiePrefab = existingZombie;
-        }
-        else
-        {
-            Debug.LogError("No zombie found with the tag 'Zombie'. Make sure there is a zombie in the scene with this tag.");
-        }
+        zombieCounter = FindObjectOfType<ZombieCounter>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Zombie"))
+        if (other.gameObject.CompareTag("Zombie") || other.gameObject.CompareTag("Player"))
         {
             if (zombiePrefab != null)
             {
@@ -33,15 +25,15 @@ public class HumanToZombie : MonoBehaviour
                 // Instantiate a new zombie at the correct ground position
                 GameObject newZombie = Instantiate(zombiePrefab, spawnPosition, transform.rotation);
 
-                // Set the speed of the new zombie to match the current global speed
-                PlayerMovement playerMovement = newZombie.GetComponent<PlayerMovement>();
+                // Increment the zombie count
+                zombieCounter.IncrementZombieCount();
 
                 // Destroy the human
                 Destroy(gameObject);
             }
             else
             {
-                Debug.LogError("Zombie prefab is not assigned. Ensure a zombie is tagged with 'Zombie' in the scene.");
+                Debug.LogError("Zombie prefab is not assigned. Assign the zombie prefab in the inspector.");
             }
         }
     }

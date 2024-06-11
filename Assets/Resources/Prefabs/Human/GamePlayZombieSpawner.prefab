@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 235326898228885640}
   - component: {fileID: 5677821073465535950}
   m_Layer: 8
-  m_Name: Human
+  m_Name: GamePlayZombieSpawner
   m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,5 +144,5 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  zombiePrefab: {fileID: 4245139500938073654, guid: c189c77f0573648d8b7a088ecc727a84,
+  zombiePrefab: {fileID: 2182182601870482079, guid: be8fb6d6facda4acc8f6b4e9758a4df2,
     type: 3}

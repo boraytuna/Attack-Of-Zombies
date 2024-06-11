@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 6068267594107990870}
   - component: {fileID: 235326898228885640}
   - component: {fileID: 5677821073465535950}
+  - component: {fileID: 2187910040174590103}
+  - component: {fileID: 7581964319527579788}
   m_Layer: 8
-  m_Name: Human
+  m_Name: Test
   m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,5 +146,39 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  zombiePrefab: {fileID: 4245139500938073654, guid: c189c77f0573648d8b7a088ecc727a84,
+  turningToZombie: {fileID: 619057191140161142, guid: c189c77f0573648d8b7a088ecc727a84,
     type: 3}
+  zombiePrefab: {fileID: 2182182601870482079, guid: be8fb6d6facda4acc8f6b4e9758a4df2,
+    type: 3}
+--- !u!114 &2187910040174590103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6085094873640799437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419d2a79c18c243b2a2146d3dad4854b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 5
+  humanTag: Human
+  spawnDistance: 10
+--- !u!114 &7581964319527579788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6085094873640799437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee20c794168745c5b782c2d8815a401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 5
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  zombieInRange: 0
