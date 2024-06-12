@@ -3,10 +3,11 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
-// This script spawns humans in the map with the prefered numbers.
+// This script spawns humans in the map with the preferred numbers.
 public class HumanSpawner : MonoBehaviour
 {
-    public GameObject humanPrefab;
+    public GameObject centralHumanPrefab; // Prefab with HumanAI, ZombieDetection, EscapePointCalculator
+    public GameObject humanPrefab; // Prefab with only HumanAI
     public Transform zombie; // Reference to the zombie object
 
     [Range(1, 20)]
@@ -21,9 +22,9 @@ public class HumanSpawner : MonoBehaviour
     public int maxHumansPerGroup;
     [Range(1f, 100)]
     public float minGroupRadius;
-    [Range(1f, 100f)]
+    [Range(1f, 10f)]
     public float maxGroupRadius;
-    [Range(1f, 100f)]
+    [Range(1f, 10f)]
     public float minGroupSeparationDistance; // Minimum distance between groups
 
     public NavMeshSurface navMeshSurface;
@@ -66,31 +67,32 @@ public class HumanSpawner : MonoBehaviour
 
     void SpawnGroup(Vector3 center, int humansPerGroup, float groupRadius)
     {
-        for (int i = 0; i < humansPerGroup; i++)
+        // Spawn the central human first
+        Vector3 centralPosition = GetValidSpawnPosition(center, groupRadius);
+        Instantiate(centralHumanPrefab, centralPosition, Quaternion.identity);
+
+        // Spawn the other humans in the group
+        for (int i = 1; i < humansPerGroup; i++)
+        {
+            Vector3 spawnPosition = GetValidSpawnPosition(center, groupRadius);
+            Instantiate(humanPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
+
+    Vector3 GetValidSpawnPosition(Vector3 center, float groupRadius)
+    {
+        Vector3 spawnPosition;
+        NavMeshHit hit;
+
+        do
         {
             Vector3 randomOffset = Random.insideUnitSphere * groupRadius;
             randomOffset.y = 0; // Ensure humans spawn on the NavMesh surface
-            Vector3 spawnPosition = center + randomOffset;
-
-            // Check if the spawn position is far enough from the zombie
-            while (Vector3.Distance(spawnPosition, zombie.position) < minDistanceFromZombie)
-            {
-                spawnPosition = GetRandomSpawnPositionOnNavMesh(); // Get a new random position
-            }
-
-            // Check if the spawn position is on the NavMesh
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(spawnPosition, out hit, 1.0f, NavMesh.AllAreas))
-            {
-                // Spawn a human at the valid position
-                Instantiate(humanPrefab, hit.position, Quaternion.identity);
-            }
-            else
-            {
-                // If the position is not on the NavMesh, try again with a new random position
-                i--; // Try again with the same index
-            }
+            spawnPosition = center + randomOffset;
         }
+        while (Vector3.Distance(spawnPosition, zombie.position) < minDistanceFromZombie || !NavMesh.SamplePosition(spawnPosition, out hit, 1.0f, NavMesh.AllAreas));
+
+        return hit.position;
     }
 
     Vector3 GetRandomSpawnPositionOnNavMesh()

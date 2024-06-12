@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 2499650689610889775}
   - component: {fileID: 295716984683703432}
   - component: {fileID: 5499439128987875001}
-  - component: {fileID: 4727154291511809465}
+  - component: {fileID: 1784950457008744871}
   m_Layer: 6
   m_Name: Player
   m_TagString: Zombie
@@ -453,7 +453,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d4708638b7b46aab59c9896c9a2b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4727154291511809465
+--- !u!114 &1784950457008744871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c0d33a9a86241b48dc360e182e2404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _joystick: {fileID: 3662662469840585174, guid: 41cda0dd87bd141d2a642aa507eb7327,
+  _joystick: {fileID: 4225142024556278994, guid: c111591faa6f741f0a8c5266954611d7,
     type: 3}
   _animatorController: {fileID: 5499439128987875001}
   _rotateSpeed: 6
