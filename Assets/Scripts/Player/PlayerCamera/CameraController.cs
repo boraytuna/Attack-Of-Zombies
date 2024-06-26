@@ -19,14 +19,14 @@ public class CameraMovement : MonoBehaviour
         _offset = _camera.position - _player.position;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         Follow();
     }
 
     private void Follow()
     {
-        _camera.DOMoveX(_player.position.x + _offset.x, _speed * Time.deltaTime);
-        _camera.DOMoveZ(_player.position.z + _offset.z, _speed * Time.deltaTime);
+        var targetPos = new Vector3(_player.position.x + _offset.x, _camera.position.y, _player.position.z + _offset.z);
+        _camera.position = targetPos;
     }
 }

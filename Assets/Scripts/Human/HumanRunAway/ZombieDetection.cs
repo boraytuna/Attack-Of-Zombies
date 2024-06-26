@@ -2,26 +2,27 @@ using UnityEngine;
 using System;
 
 // This script is attached to the main human object 
-// and it checks if a zombie objects are in range.
+// and it checks if zombie objects are in range.
 public class ZombieDetection : MonoBehaviour
 {
     public float detectionRange = 10f; // Range for detecting zombies
-    private Transform playerTransform; // Reference to the player (assumed to be the zombie)
+    public LayerMask zombieLayer; // Layer mask for detecting zombies
 
-    public static event Action<Vector3> OnZombieDetected; // Event triggered when zombie is detected
-
-    void Start()
-    {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find player GameObject
-    }
+    public static event Action<Vector3> OnZombieDetected; // Event triggered when a zombie is detected
 
     void Update()
     {
-        // Check if the player (zombie) is within detection range
-        if (Vector3.Distance(transform.position, playerTransform.position) < detectionRange)
+        // Find all colliders within the detection range that are on the zombie layer
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, zombieLayer);
+        foreach (Collider collider in colliders)
         {
-            Debug.Log("Zombie detected"); // Log detection
-            OnZombieDetected?.Invoke(playerTransform.position); // Trigger zombie detection event
+            Transform zombieTransform = collider.transform;
+            if (zombieTransform != null)
+            {
+                Debug.Log("Zombie detected"); // Log detection
+                OnZombieDetected?.Invoke(zombieTransform.position); // Trigger zombie detection event
+                break; // Break after detecting the first zombie in range
+            }
         }
     }
 

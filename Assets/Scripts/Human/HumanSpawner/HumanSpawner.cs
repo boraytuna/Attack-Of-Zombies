@@ -31,6 +31,11 @@ public class HumanSpawner : MonoBehaviour
 
     private List<Vector3> groupCenters = new List<Vector3>();
 
+    public void SpawnHumans()
+    {
+        Start();
+    }
+
     void Start()
     {
         navMeshSurface.BuildNavMesh(); // Ensure the NavMesh is built before spawning humans

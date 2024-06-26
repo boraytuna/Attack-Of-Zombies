@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// This script counts the number of zombies in the map.
 public class ZombieCounter : MonoBehaviour
 {
     private int zombieCount = 1;
@@ -19,6 +18,6 @@ public class ZombieCounter : MonoBehaviour
     public void DecrementZombieCount()
     {
         zombieCount--;
-        Debug.Log("Zombie Count: " + zombieCount);
+        Debug.Log("Zombie Count");
     }
 }

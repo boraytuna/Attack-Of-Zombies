@@ -54,9 +54,9 @@ public class HumanDetector : MonoBehaviour
         {
             foreach (Transform human in detectedHumans)
             {
-                if (human.GetComponent<HumanAI>().IsMainHuman(mainHuman))
+                if (human.GetComponent<HumanMovement>().IsMainHuman(mainHuman))
                 {
-                    human.GetComponent<HumanAI>().MoveToEscapePoint(); // Move human to escape point
+                    human.GetComponent<HumanMovement>().MoveToEscapePoint(); // Move human to escape point
                 }
             }
         }
