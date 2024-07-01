@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3888164383363033386
+--- !u!1 &5800007976466060718
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4136096936208952795}
-  - component: {fileID: 2865394785790913104}
+  - component: {fileID: 3958017397595272213}
+  - component: {fileID: 8628893467388455580}
   m_Layer: 0
-  m_Name: HumanSpawner
+  m_Name: HumanSpeedManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4136096936208952795
+--- !u!4 &3958017397595272213
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3888164383363033386}
+  m_GameObject: {fileID: 5800007976466060718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2865394785790913104
+--- !u!114 &8628893467388455580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3888164383363033386}
+  m_GameObject: {fileID: 5800007976466060718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbaeac1fd32546959e2d0807335d597, type: 3}
+  m_Script: {fileID: 11500000, guid: 211699401b7f24fb9b8ee1431425c120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centralHumanPrefab: {fileID: 7823827973598661939, guid: 0e1327402f7014beb9010574cf6f72b3,
-    type: 3}
-  humanPrefab: {fileID: 6879920544499097484, guid: 1dad215f5e40541b5a06fa6b27e645ca,
-    type: 3}
-  zombie: {fileID: 0}
-  minDistanceFromZombie: 10
-  minNumberOfGroups: 5
-  maxNumberOfGroups: 10
-  minHumansPerGroup: 5
-  maxHumansPerGroup: 10
-  minGroupRadius: 3.4
-  maxGroupRadius: 4.02
-  minGroupSeparationDistance: 10
-  navMeshSurface: {fileID: 0}
+  currentSpeed: 0

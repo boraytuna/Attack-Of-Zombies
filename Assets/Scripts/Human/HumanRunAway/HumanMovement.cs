@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.AI; // Ensure this namespace is included
 
-// This script moves the human objects using nav mesh agent.
 public class HumanMovement : MonoBehaviour
 {
     private static Vector3 escapePoint; // Static escape point shared by all humans

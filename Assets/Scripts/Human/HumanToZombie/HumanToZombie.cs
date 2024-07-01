@@ -39,6 +39,9 @@ public class HumanToZombie : MonoBehaviour
                 // Add the zombie to the ZombieManager
                 zombieManager.AddZombie(newZombieObject);
 
+                // Increment the number of total zombies
+                zombieCounter.IncrementZombieCount();
+
                 // Destroy the human
                 Destroy(gameObject);
             }

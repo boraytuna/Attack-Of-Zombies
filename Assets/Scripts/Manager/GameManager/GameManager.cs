@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Initialize systems if necessary
+        // Initialize systems
         InitializeSystems();
     }
 

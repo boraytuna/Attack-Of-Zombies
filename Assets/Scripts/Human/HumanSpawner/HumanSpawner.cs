@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+
 using UnityEngine;
 using UnityEngine.AI;
 
 // This script spawns humans in the map with the preferred numbers.
 public class HumanSpawner : MonoBehaviour
 {
+    public static HumanSpawner Instance { get; private set; }
+
     public GameObject centralHumanPrefab; // Prefab with HumanAI, ZombieDetection, EscapePointCalculator
     public GameObject humanPrefab; // Prefab with only HumanAI
     public Transform zombie; // Reference to the zombie object
@@ -30,6 +33,19 @@ public class HumanSpawner : MonoBehaviour
     public NavMeshSurface navMeshSurface;
 
     private List<Vector3> groupCenters = new List<Vector3>();
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void SpawnHumans()
     {
@@ -123,4 +139,5 @@ public class HumanSpawner : MonoBehaviour
             Gizmos.DrawWireSphere(groupCenter, minGroupSeparationDistance);
         }
     }
+    
 }
