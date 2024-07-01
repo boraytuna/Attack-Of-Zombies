@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public HumanSpawner humanSpawner;
     public PlayerMovement playerMovement;
     public ZombieManager zombieManager;
-    // public List<GamePlayZombieMovement> zombies = new List<GamePlayZombieMovement>();
 
     private void Awake()
     {
@@ -45,12 +44,6 @@ public class GameManager : MonoBehaviour
 
         // Initialize the player's movement
         playerMovement.Initialize();
-
-        // // Initialize all zombies in the scene
-        // foreach (var zombie in zombies)
-        // {
-        //     zombie.Initialize(playerMovement);
-        // }
 
         // Register playerMovement to zombieManager
         zombieManager.Initialize(playerMovement);

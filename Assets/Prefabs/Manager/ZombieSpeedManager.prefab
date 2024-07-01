@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2791826528598362265
+--- !u!1 &4162999472398501986
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4315470439964095023}
-  - component: {fileID: 4920676813095488016}
-  - component: {fileID: 4034113901465472133}
+  - component: {fileID: 3890813021106917479}
+  - component: {fileID: 7547203529415930579}
   m_Layer: 0
-  m_Name: ZombieManager
+  m_Name: ZombieSpeedManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4315470439964095023
+--- !u!4 &3890813021106917479
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2791826528598362265}
+  m_GameObject: {fileID: 4162999472398501986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 9.154156, y: -8.619183, z: 14.683721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4920676813095488016
+--- !u!114 &7547203529415930579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2791826528598362265}
+  m_GameObject: {fileID: 4162999472398501986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff86459a7be34fbcb0074a04d5a5155, type: 3}
+  m_Script: {fileID: 11500000, guid: d5b246905323845818639a7e9ec02945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4034113901465472133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2791826528598362265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ba2bf2bc3e54904bce8d77b0e866ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombies: []
+  player: {fileID: 0}
+  currentSpeed: 0

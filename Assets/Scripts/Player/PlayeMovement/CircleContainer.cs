@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class CircleContainer : MonoBehaviour
 {
-    public float circleRadius = 5f; // Radius of the circle
-    public GameObject player; // Reference to the player object
+    private float circleRadius = 5f; // Radius of the circle
+    private float minZombieFollowDistance = 1f; // Minimum distance for a zombie to follow the circle
+    private GameObject player; // Reference to the player object
     public List<GameObject> zombiesInCircle = new List<GameObject>(); // List to store zombies in the circle
 
-    private List<Vector3> zombiePositions = new List<Vector3>(); // List to store assigned positions for zombies
+    private List<Vector3> zombieRelativePositions = new List<Vector3>(); // List to store assigned positions for zombies
 
     void Update()
     {
@@ -23,11 +24,11 @@ public class CircleContainer : MonoBehaviour
             if (zombie != null)
             {
                 // Ensure we have a position assigned for this zombie
-                if (zombiePositions.Count <= i)
+                if (zombieRelativePositions.Count <= i)
                 {
                     // Assign a position within the circle radius
-                    Vector3 offset = Random.insideUnitCircle.normalized * circleRadius;
-                    Vector3 spawnPosition = transform.position + new Vector3(offset.x, 0f, offset.y); // Adjust y-axis as needed
+                    Vector3 offset = Random.insideUnitCircle.normalized * Random.Range(minZombieFollowDistance, circleRadius);
+                    Vector3 spawnPosition = new Vector3(offset.x, 0f, offset.y); // Adjust y-axis as needed
 
                     // Raycast to find ground position
                     Vector3 groundPosition = FindGroundPosition(spawnPosition);
@@ -36,12 +37,12 @@ public class CircleContainer : MonoBehaviour
                     zombie.transform.position = groundPosition;
 
                     // Store assigned position
-                    zombiePositions.Add(groundPosition);
+                    zombieRelativePositions.Add(groundPosition);
                 }
                 else
                 {
                     // Set the zombie's position if already assigned
-                    zombie.transform.position = zombiePositions[i];
+                    zombie.transform.position = transform.position + zombieRelativePositions[i];
                 }
             }
         }
@@ -60,9 +61,9 @@ public class CircleContainer : MonoBehaviour
         zombiesInCircle.Remove(zombie);
         // Clear the assigned position for the removed zombie
         int index = zombiesInCircle.IndexOf(zombie);
-        if (index != -1 && index < zombiePositions.Count)
+        if (index != -1 && index < zombieRelativePositions.Count)
         {
-            zombiePositions.RemoveAt(index);
+            zombieRelativePositions.RemoveAt(index);
         }
     }
 

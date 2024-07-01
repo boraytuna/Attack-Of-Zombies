@@ -1,31 +1,58 @@
 using UnityEngine;
-
-// This script manages a central speed for each zombie.
-public static class ZombieSpeedManager
+// Daha zombileri zamanla hizlandiracak methodu yazmadim.
+public class ZombieSpeedManager : MonoBehaviour
 {
-    public static float currentSpeed = 5f; // Initial speed
-    public static float maxSpeed = 15f; // Example max speed
-    public static float speedIncreaseRate = 1f; // Example speed increase rate
-    public static float middleSpeed = 10f; // Middle speed
+    public static ZombieSpeedManager Instance { get; private set; }
 
-    private static bool isMoving = false; // Flag to track if the player is moving
+    [SerializeField]
+    private GameObject player;
+    private PlayerMovement playerMovement;
 
-    public static void SetMoving(bool moving)
+    public float currentSpeed;
+    private float minSpeed = 10f;
+    private float middleSpeed = 10f;
+    private float maxSpeed = 15f;
+    private float speedIncreaseRate = 1f;
+
+    private bool reachedMaxSpee = false;
+
+    private void Awake()
     {
-        isMoving = moving;
-    }
-
-    public static void IncreaseSpeed(float deltaTime)
-    {
-        if (isMoving)
+        if (Instance == null)
         {
-            currentSpeed = Mathf.Min(currentSpeed + speedIncreaseRate * deltaTime, maxSpeed);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            currentSpeed = Mathf.Max(currentSpeed - speedIncreaseRate * deltaTime, middleSpeed);
+            Destroy(gameObject);
         }
-        // Ensure the current speed never goes below middle speed or above max speed
-        currentSpeed = Mathf.Clamp(currentSpeed, middleSpeed, maxSpeed);
     }
+
+    void Start()
+    {
+        currentSpeed = minSpeed;
+
+        if (player != null)
+        {
+            // Find the Playermovement script
+            if (player != null)
+            {
+                playerMovement = player.GetComponent<PlayerMovement>();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if(playerMovement.isMoving == true)
+        {
+            Debug.Log("Player Moving");
+        }
+        else
+        {
+            Debug.Log("Player not Moving");
+        }
+    }
+
 }

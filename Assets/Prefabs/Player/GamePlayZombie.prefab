@@ -377,7 +377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4245139500938073654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -433,7 +433,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &295716984683703432
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4245139500938073654}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1187922a1e2a74b9093d3374cf25c765, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -454,9 +454,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!114 &5499439128987875001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,10 +481,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9146b3ed7f7b342a1980478b4da51ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistanceFromPlayer: 10
-  baseSpeed: 10
-  maxSpeedMultiplier: 2
-  stopDistance: 1.5
+  zombieSpeedManager: {fileID: 7547203529415930579, guid: 9f49059f6c0cb4affa0eed4103885a96,
+    type: 3}
+  player: {fileID: 402107133892114898, guid: c189c77f0573648d8b7a088ecc727a84, type: 3}
 --- !u!1 &4416208517746027337
 GameObject:
   m_ObjectHideFlags: 0

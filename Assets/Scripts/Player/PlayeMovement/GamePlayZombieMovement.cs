@@ -5,14 +5,12 @@ public class GamePlayZombieMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private ZombieAnimatorController zombieAnimatorController;
 
-    private Transform playerTransform; // Transform of the player
-    private Vector3 initialDirection; // Initial direction vector towards the player on spawn
-    private float initialDistance; // Initial distance from the player on spawn
-    public float maxDistanceFromPlayer = 10f; // Maximum distance allowed between this zombie and the player
-
-    public float baseSpeed = 7f; // Base speed of the zombie
-    public float maxSpeedMultiplier = 2f; // Maximum speed multiplier for zombies far from the player
-    public float stopDistance = 1f; // Distance within which the zombie will stop to avoid pushing the player
+    private Transform playerTransform;
+    private float moveSpeed = 10f; // Movement speed of the zombie
+    private float rotateSpeed = 6f;
+    private float catchUpSpeed = 15f; // Speed when catching up to the player
+    private float followRadius = 3f; // Radius around the player to follow input
+    private bool isFollowingInput = true;
 
     private void Start()
     {
@@ -21,73 +19,190 @@ public class GamePlayZombieMovement : MonoBehaviour
 
         // Initialize playerTransform with the player's transform
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
-        // Calculate initial direction and distance from player
-        initialDirection = (playerTransform.position - transform.position).normalized;
-        initialDistance = Vector3.Distance(transform.position, playerTransform.position);
     }
 
     private void Update()
     {
-        float currentDistance = Vector3.Distance(transform.position, playerTransform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        if (currentDistance > stopDistance)
+        if (distanceToPlayer > followRadius)
         {
-            MoveZombie(currentDistance);
+            // If outside the follow radius, catch up to the player
+            isFollowingInput = false;
+            MoveTowardsPlayer();
         }
         else
         {
-            // Stop moving and play idle animation when within the stop distance
-            _rigidbody.velocity = Vector3.zero;
-            zombieAnimatorController.PlayIdle();
+            // If inside the follow radius, follow player input
+            isFollowingInput = true;
+            Move();
         }
     }
 
-    private void MoveZombie(float currentDistance)
+    private void Move()
     {
-        if (playerTransform != null)
+        if (isFollowingInput)
         {
-            // Update initial direction based on current player position
-            initialDirection = (playerTransform.position - transform.position).normalized;
+            Vector3 moveVector = PlayerInputManager.Instance.MoveVector;
 
-            // Adjust zombie speed based on distance from player
-            float distanceRatio = Mathf.Clamp(currentDistance / maxDistanceFromPlayer, 0f, 1f);
-            float speedMultiplier = Mathf.Lerp(1f, maxSpeedMultiplier, distanceRatio);
-
-            // Set the zombie's speed
-            float currentSpeed = baseSpeed * speedMultiplier;
-
-            // Move the zombie towards the player at adjusted speed
-            Vector3 targetVelocity = initialDirection * currentSpeed;
-            _rigidbody.velocity = new Vector3(targetVelocity.x, _rigidbody.velocity.y, targetVelocity.z);
-
-            // Rotate the zombie towards the movement direction
-            if (initialDirection.magnitude > 0)
+            if (moveVector.magnitude > 0)
             {
-                Vector3 newDirection = Vector3.RotateTowards(transform.forward, initialDirection, Time.deltaTime * 2f, 0.0f);
+                Vector3 direction = new Vector3(moveVector.x, 0, moveVector.z).normalized;
+                Vector3 targetVelocity = direction * moveSpeed;
+
+                // Clamp the velocity to ensure it doesn't exceed the maximum speed
+                targetVelocity = Vector3.ClampMagnitude(targetVelocity, moveSpeed);
+
+                // Apply the target velocity to the Rigidbody
+                _rigidbody.velocity = new Vector3(targetVelocity.x, _rigidbody.velocity.y, targetVelocity.z);
+
+                // Rotate the zombie towards the movement direction
+                Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed * Time.deltaTime, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
-            }
 
-            // Play the appropriate animation based on movement
-            if (initialDirection.magnitude > 0)
-            {
+                // Play the run animation
                 zombieAnimatorController.PlayRun();
             }
             else
             {
+                // Play the idle animation
                 zombieAnimatorController.PlayIdle();
+
+                // Stop the zombie's movement
+                _rigidbody.velocity = Vector3.zero;
             }
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void MoveTowardsPlayer()
     {
-        // Check if the collision is with another zombie or the player
-        if (collision.gameObject.CompareTag("Zombie") || collision.gameObject.CompareTag("Player"))
-        {
-            // Stop moving to prevent pushing
-            _rigidbody.velocity = Vector3.zero;
-            zombieAnimatorController.PlayIdle();
-        }
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        Vector3 targetVelocity = direction * catchUpSpeed;
+
+        // Apply the target velocity to the Rigidbody
+        _rigidbody.velocity = new Vector3(targetVelocity.x, _rigidbody.velocity.y, targetVelocity.z);
+
+        // Rotate the zombie towards the player
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed * Time.deltaTime, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+
+        // Play the run animation
+        zombieAnimatorController.PlayRun();
     }
+
 }
+// using UnityEngine;
+
+// public class GamePlayZombieMovement : MonoBehaviour
+// {
+//     private Rigidbody _rigidbody;
+//     private ZombieAnimatorController zombieAnimatorController;
+
+//     [SerializeField] private ZombieSpeedManager zombieSpeedManager; 
+//     private float speed;
+
+//     [SerializeField]
+//     private GameObject player;
+//     private PlayerMovement playerMovement;
+
+//     private Transform playerTransform;
+//     //private float moveSpeed = 10f; // Movement speed of the zombie
+//     private float rotateSpeed = 6f;
+//     private float catchUpSpeed = 15f; // Speed when catching up to the player
+//     private float followRadius = 3f; // Radius around the player to follow input
+//     private bool isFollowingInput = true;
+
+//     private void Start()
+//     {
+//         _rigidbody = GetComponent<Rigidbody>();
+//         zombieAnimatorController = GetComponent<ZombieAnimatorController>();
+
+//         // Initialize playerTransform with the player's transform
+//         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+//         if (player != null)
+//         {
+//             // Find the Playermovement script
+//             if (player != null)
+//             {
+//                 playerMovement = player.GetComponent<PlayerMovement>();
+//             }
+//         }
+
+//     }
+
+//     private void Update()
+//     {
+//         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+//         if(zombieSpeedManager != null && playerMovement.isMoving == true)
+//         {
+//             speed = zombieSpeedManager.currentSpeed;
+//         }
+
+//         if (distanceToPlayer > followRadius)
+//         {
+//             // If outside the follow radius, catch up to the player
+//             isFollowingInput = false;
+//             MoveTowardsPlayer();
+//         }
+//         else
+//         {
+//             // If inside the follow radius, follow player input
+//             isFollowingInput = true;
+//             Move();
+//         }
+//     }
+
+//     private void Move()
+//     {
+//         if (isFollowingInput)
+//         {
+//             Vector3 moveVector = PlayerInputManager.Instance.MoveVector;
+
+//             if (moveVector.magnitude > 0)
+//             {
+//                 Vector3 direction = new Vector3(moveVector.x, 0, moveVector.z).normalized;
+//                 Vector3 targetVelocity = direction * speed;
+
+//                 // Clamp the velocity to ensure it doesn't exceed the maximum speed
+//                 targetVelocity = Vector3.ClampMagnitude(targetVelocity, speed);
+
+//                 // Apply the target velocity to the Rigidbody
+//                 _rigidbody.velocity = new Vector3(targetVelocity.x, _rigidbody.velocity.y, targetVelocity.z);
+
+//                 // Rotate the zombie towards the movement direction
+//                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed * Time.deltaTime, 0.0f);
+//                 transform.rotation = Quaternion.LookRotation(newDirection);
+
+//                 // Play the run animation
+//                 zombieAnimatorController.PlayRun();
+//             }
+//             else
+//             {
+//                 // Play the idle animation
+//                 zombieAnimatorController.PlayIdle();
+
+//                 // Stop the zombie's movement
+//                 _rigidbody.velocity = Vector3.zero;
+//             }
+//         }
+//     }
+
+//     private void MoveTowardsPlayer()
+//     {
+//         Vector3 direction = (playerTransform.position - transform.position).normalized;
+//         Vector3 targetVelocity = direction * catchUpSpeed;
+
+//         // Apply the target velocity to the Rigidbody
+//         _rigidbody.velocity = new Vector3(targetVelocity.x, _rigidbody.velocity.y, targetVelocity.z);
+
+//         // Rotate the zombie towards the player
+//         Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed * Time.deltaTime, 0.0f);
+//         transform.rotation = Quaternion.LookRotation(newDirection);
+
+//         // Play the run animation
+//         zombieAnimatorController.PlayRun();
+//     }
+
+// }

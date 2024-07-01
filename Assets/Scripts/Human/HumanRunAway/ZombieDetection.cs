@@ -19,7 +19,7 @@ public class ZombieDetection : MonoBehaviour
             Transform zombieTransform = collider.transform;
             if (zombieTransform != null)
             {
-                Debug.Log("Zombie detected"); // Log detection
+                //Debug.Log("Zombie detected"); // Log detection
                 OnZombieDetected?.Invoke(zombieTransform.position); // Trigger zombie detection event
                 break; // Break after detecting the first zombie in range
             }

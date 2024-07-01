@@ -988,7 +988,7 @@ Transform:
   - {fileID: 1992693722858706096}
   - {fileID: 6027039474047179275}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8702691091004178035
 Animator:
@@ -1018,7 +1018,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7823827973598661939}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1187922a1e2a74b9093d3374cf25c765, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1031,9 +1031,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!195 &4354017926223753958
 NavMeshAgent:
   m_ObjectHideFlags: 0
